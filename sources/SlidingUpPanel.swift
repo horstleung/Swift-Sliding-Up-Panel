@@ -201,12 +201,15 @@ class SlidingUpPanel: UIView {
     //MARK: Interactions
     override func pointInside(point: CGPoint, withEvent event: UIEvent?) -> Bool {
         //check if user touching on the top bar
-        
         let barFrame = CGRectMake(0,0,self.frame.width,self.tooltipHeight)
         return CGRectContainsPoint(barFrame, point)
     }
     
     func detectPan(recognizer:UIPanGestureRecognizer) {
+        if recognizer.state == .Began {
+            lastLocation = self.center
+            toolTipLastLocation = tooltip?.center
+        }
         let translation  = recognizer.translationInView(self.superview!)
         self.center = CGPointMake(lastLocation.x, lastLocation.y + translation.y)
         if let tooltipView = tooltip , loc = toolTipLastLocation{
@@ -227,11 +230,5 @@ class SlidingUpPanel: UIView {
         }
     }
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-//        self.superview?.bringSubviewToFront(self)
-        
-        lastLocation = self.center
-        toolTipLastLocation = tooltip?.center
-    }
 
 }
