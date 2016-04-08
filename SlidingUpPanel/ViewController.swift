@@ -34,10 +34,21 @@ class ViewController: UIViewController {
         
         let tooltip = UIView(frame: frame);
         tooltip.backgroundColor = UIColor.lightGrayColor()
+        let btn = UIButton(frame: CGRectMake(320.0 - 80.0, 0, 80, 30))
+        btn.backgroundColor = UIColor.brownColor()
+        btn.setTitle("OOps", forState: .Normal)
+        btn.addTarget(self, action: #selector(ViewController.greet), forControlEvents: .TouchUpInside)
+        tooltip.addSubview(btn)
+        
         panel.tooltip = tooltip
         
         
         self.view.addSubview(panel)
+    }
+    
+    func greet()
+    {
+        print("kakakakakaka")
     }
 }
 
